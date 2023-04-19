@@ -9,22 +9,25 @@
 # Напишите программу, которая вычисляет стоимость введенного пользователем слова. 
 # Будем считать, что на вход подается только одно слово, которое содержит либо только английские, либо только русские буквы.
 
-word = input("Введите слово: ")
-word = word.upper()
-total = 0
-for c in range(len(word)):
-    if word[c] in "AEIOULNSTRАВЕИНОРСТ":
-        total += 1
-    if word[c] in "DGДКЛМПУ":
-        total += 2
-    if word[c] in "BCMPБГЁЬЯ":
-        total += 3
-    if word[c] in "FHVWYЙЫ":
-        total += 4
-    if word[c] in "KЖЗХЦЧ":
-        total += 5
-    if word[c] in "JXШЭЮ":
-        total += 8
-    if word[c] in "QZФЩЪ":
-        total += 10
-print(total)
+def total_sum():
+    word = input("Введите слово: ")
+    word = word.upper()
+    total = 0
+    for c in range(len(word)):
+        if word[c] in "AEIOULNSTRАВЕИНОРСТ":
+            total += 1
+        if word[c] in "DGДКЛМПУ":
+            total += 2
+        if word[c] in "BCMPБГЁЬЯ":
+            total += 3
+        if word[c] in "FHVWYЙЫ":
+            total += 4
+        if word[c] in "KЖЗХЦЧ":
+            total += 5
+        if word[c] in "JXШЭЮ":
+            total += 8
+        if word[c] in "QZФЩЪ":
+            total += 10
+    return total
+
+print(total_sum())
