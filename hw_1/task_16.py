@@ -9,7 +9,7 @@ def creating_array():
     N = int(input("Введите длину массива: "))
     list_1 = []
     for i in range(N):
-        list_1.append(randint(3, 5))
+        list_1.append(randint(-10, 10))
     return list_1
 
 def search_item():
@@ -19,7 +19,7 @@ def search_item():
     for i in range(len(list_2)):
         if list_2[i] == X:
             count += 1
-    return list_2
+    return(f"{list_2}, количество элементов {X} в массиве: {count}")
 
 print(search_item())
 
