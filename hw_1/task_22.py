@@ -4,7 +4,7 @@
 # Затем пользователь вводит сами элементы множеств.
 
 def create_arr():
-    list = [int(input("Введите элемент: ")) for i in range(int(input("Введите длину массива: ")))]
+    list = [int(input(f"Введите {i + 1} элемент: ")) for i in range(int(input("Введите длину массива: ")))]
     return list
 
 # def creating_array(): ### Можно использовать и такую функцию
