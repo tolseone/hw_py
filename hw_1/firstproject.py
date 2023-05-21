@@ -24,8 +24,9 @@ def compare_num():
             count += 1
         else:
             print(f"Вы угадали число {num} за {count + 1} попыток, Поздравляем! Спасибо за игру! Всего хорошего!")
+            if input("хотите ещё?") == "да":
+                compare_num()
             break
-
 compare_num()
 
 
