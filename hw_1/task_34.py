@@ -10,16 +10,16 @@
 # **Ввод:** пара-ра-рам рам-пам-папам па-ра-па-да    
 #     **Вывод:** Парам пам-пам  
 
-list_of_vowels = ["а", "о", "е", "у", "ю", "и", "ё", "э", "я", "ы"]
+list_of_vowels = ["а", "о", "е", "у", "ю", "и", "ё", "э", "я", "ы"] # Список гласных, можно также использовать и словарь
 def is_valid():
     list_res = []
-    list_of_phrases = input("Введите ваше стихотворение: ").lower().split()
+    list_of_phrases = input("Введите ваше стихотворение: ").lower().split() # Преобразуем введённые данные в список
     for words in list_of_phrases:
-        count = 0
+        count = 0 # После прохождения каждой фразы обнуляем счётчик
         for c in words:
-            count += c in list_of_vowels
-        list_res.append(count)
-    return list_res.count(list_res[0]) == len(list_res)
+            count += c in list_of_vowels # Прибавляем в счётчик 1, если выполнено условие
+        list_res.append(count) # В новый список добавляем количество гласных в каждой фразе стихотворения
+    return list_res.count(list_res[0]) == len(list_res) # Возвращаем bool (True/False)
 
 if is_valid():
     print("Парам пам-пам")
