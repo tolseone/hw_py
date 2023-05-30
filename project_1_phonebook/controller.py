@@ -40,11 +40,12 @@ def start():
         elif answer == "5":
             info_for_delete = input("Введите Имя и номер телефона контакта через пробел, который вы хотите удалить: ").split()
             deleted_cont = model.delete_contact(info_for_delete)
-            if isinstance(deleted_cont, str):
+            if len(deleted_cont) != 0:
                 view.deleted_contact(deleted_cont)
             else:
                 view.error_to_del_contact()
         elif answer == "6":
+            view.goodbye()
             break
         else:
             view.error()

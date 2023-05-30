@@ -1,6 +1,9 @@
 def welcome():
     print("Приветствую, Пользователь!", end=' ')
 
+def goodbye():
+    print("Программа завершает работу.\nВозвращайтесь снова!")
+
 def сontacting_the_user(username: str):
     print(f'----------------------------\n{username.capitalize()}, что для вас сделать?')
 
@@ -37,7 +40,7 @@ def show_red_contacts(old: list, new: list):
     print("Контакты: ", *old, sep='\n')
     print("Заменены на: ",*new, sep='\n')
 
-def deleted_contact(deleted_contact: str):
+def deleted_contact(deleted_contact):
     print(f'Успешное удаление контакта:\n{deleted_contact}')
 
 def error_to_del_contact():
