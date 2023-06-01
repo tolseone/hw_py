@@ -1,3 +1,7 @@
+def create_phonebook():
+    with open('phonebook.txt', 'a', encoding='utf-8') as file:
+        pass
+
 def get_data():
     with open('phonebook.txt', 'r', encoding = 'utf-8') as file:
         contacts = list(map(lambda line: line.strip(), file.readlines()))

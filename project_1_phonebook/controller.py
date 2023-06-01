@@ -3,13 +3,17 @@ import view, model
 def start():
     view.welcome()
     username = input("Как мне к вам обращаться?\n")
+    model.create_phonebook()
     while True:
         view.сontacting_the_user(username)
         view.menu()
         answer = input("Введите команду: ")
         if answer == "1":
             date = model.get_data()
-            view.show_contacts(date)
+            if len(date) != 0:
+                view.show_contacts(date)
+            else:
+                view.noone_contacts()
         elif answer == "2":
             contact = input("Для того, чтобы создать новый контакт, введите\nФ И О и номер телефона через пробел: ")
             res = model.add_contact(contact)
@@ -41,7 +45,7 @@ def start():
                 else:
                     view.error()
         elif answer == "5":
-            info_for_delete = input("Введите Имя и номер телефона контакта через пробел, который вы хотите удалить: ").split()
+            info_for_delete = input("Введите данные контакта через пробел для удаления: ").split()
             deleted_cont = model.delete_contact(info_for_delete)
             if len(deleted_cont) != 0:
                 view.deleted_contact(deleted_cont)

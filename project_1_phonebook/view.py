@@ -20,6 +20,9 @@ def menu():
 def error():
     print("Ошибка, введённой команды не существует.")
 
+def noone_contacts():
+    print("На данный момент телефонная книга пуста.")
+
 def show_contacts(date: list):
     print(*date, sep='\n')
 
@@ -38,10 +41,10 @@ def submenu():
 
 def show_red_contacts(old: list, new: list):
     print("Контакты: ", *old, sep='\n')
-    print("Заменены на: ",*new, sep='\n')
+    print("Заменены на: ", *new, sep='\n')
 
 def deleted_contact(deleted_contact):
-    print(f'Успешное удаление контакта:\n{deleted_contact}')
+    print(f'Успешное удаление контакта: {" ".join(deleted_contact)}')
 
 def error_to_del_contact():
     print("Ошибка! контакта с такими данными не существует.")
