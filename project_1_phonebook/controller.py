@@ -26,10 +26,13 @@ def start():
                 view.submenu()
                 user_response = input("Введите команду: ")
                 if user_response == "1":
-                    old_name = input("Введите данные, которые хотите заменить(в формате Ф И О номер телефона): ")
-                    new_name = input("Введите новые данные для замены: ")
-                    old_data, new_data = model.replace_data(old_name, new_name)
-                    view.show_red_contacts(old_data, new_data)
+                    old_name = input("Введите данные, которые хотите заменить(в формате Ф И О номер телефона): ").split()
+                    new_name = input("Введите новые данные для замены: ").split()
+                    if len(old_name) == len(new_name):
+                        old_data, new_data = model.replace_data(old_name, new_name)
+                        view.show_red_contacts(old_data, new_data)
+                    else:
+                        view.error_to_red()
                 elif user_response == "2":
                     date = model.get_data()
                     view.show_contacts(date)
