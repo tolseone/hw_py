@@ -4,7 +4,8 @@ import numpy as np
 def print_matrix(matrix):
     for row in matrix:
         for elems in row:
-            print(str(elems).ljust(20), end=' ')
+            elems = round(elems, 4)
+            print(str(elems).ljust(5), end=' ')
         print()
 
 def menu():
@@ -18,7 +19,7 @@ def error():
     print("Ошибка, введённой команды не существует.")
 
 h = int(input("Введите значение высоты в градусах: "))*pi/180 # в радианах
-print(h)
+# print(h)
 m = 12 # минуты дуги
 array_with_azumits = [int(input(f"Введите значение азимута на {i + 1} светило: ")) for i in range(int(input("Введите количество светил: ")))]
 array_radians_1 =[radians(elem) for elem in array_with_azumits]
@@ -26,31 +27,34 @@ array_radians_1 =[radians(elem) for elem in array_with_azumits]
 while True:
     menu()
     user_answer = input("Введите команду: ")
-    if user_answer == '1':
-        matrix_A = [[sin(array_radians_1[i]) * tan(h) - sin(array_radians_1[i + 1]) * tan(h), cos(array_radians_1[i + 1]) * tan(h) - cos(array_radians_1[i]) * tan(h)] for i in range(len(array_radians_1) - 1)]
-        matrix_A.append([sin(array_radians_1[-1]) * tan(h) - sin(array_radians_1[0]) * tan(h), cos(array_radians_1[0]) * tan(h) - cos(array_radians_1[-1]) * tan(h)])
+    if user_answer == "1":
+        matrix_A = [[sin(array_radians_1[i + 1]) * tan(h) - sin(array_radians_1[i]) * tan(h), cos(array_radians_1[i]) * tan(h) - cos(array_radians_1[i + 1]) * tan(h)] for i in range(len(array_radians_1) - 1)]
+        matrix_A.append([sin(array_radians_1[0]) * tan(h) - sin(array_radians_1[-1]) * tan(h), cos(array_radians_1[-1]) * tan(h) - cos(array_radians_1[0]) * tan(h)])
         print("Матрица А:")
         print_matrix(matrix_A) # готовая матрица А
         A_transpose = np.transpose(matrix_A) # транспонированная матрица А
+        print("Транспонированная матрица А:")
+        print_matrix(A_transpose)
         prod_A = (np.dot(A_transpose, matrix_A)) # произведение матрицы А на матрицу Атранспонированную
         inversed_matrix = np.linalg.inv(prod_A) # обратная матрица
-        print("Обратная матрица: ")
-        print_matrix(inversed_matrix)
-        Tr = sum([inversed_matrix[i][i] for i in range(len(inversed_matrix))])
-        M = sqrt(Tr) * m # радиальная СКП
+        res = np.dot(m ** 2, inversed_matrix)
+        print("Ковариационная матрица: ")
+        print_matrix(res)
+        Tr = sum([res[i][i] for i in range(len(res))])
+        M = sqrt(Tr) # радиальная СКП
         print(f"След ковариационной матрицы = {Tr}\nРадиальная СКП = {M}")
     elif user_answer == "2":
         if len(array_radians_1) % 2 == 0:
-            matrix_A_01 = [[sin(array_radians_1[i - 1]) * tan(h) - sin(array_radians_1[i]) * tan(h), cos(array_radians_1[i]) * tan(h) - cos(array_radians_1[i - 1]) * tan(h)] for i in range(1, len(array_radians_1), 2)]
+            matrix_A_01 = [[sin(array_radians_1[i]) * tan(h) - sin(array_radians_1[i - 1]) * tan(h), cos(array_radians_1[i - 1]) * tan(h) - cos(array_radians_1[i]) * tan(h)] for i in range(1, len(array_radians_1), 2)]
             A_01_transpose = np.transpose(matrix_A_01)
             prod_A_01 = (np.dot(A_01_transpose, matrix_A_01))
             inversed_matrix_01 = np.linalg.inv(prod_A_01)
-            print("Обратная матрица: ")
-            print_matrix(inversed_matrix_01)
-            Tr = sum([inversed_matrix_01[i][i] for i in range(len(inversed_matrix_01))])
-            print(f"След для пар азимутов = {Tr}")
-            M = sqrt(Tr) * m
-            print(f"Радиальная СКП для пар азимутов = {M}")
+            res_01 = np.dot(m ** 2, inversed_matrix_01)
+            print("Ковариационная матрица: ")
+            print_matrix(res_01)
+            Tr = sum([res_01[i][i] for i in range(len(res_01))])
+            M = sqrt(Tr) # радиальная СКП
+            print(f"След ковариационной матрицы = {Tr}\nРадиальная СКП для пар азимутов = {M}")
         else:
             print("Количество введёных светил нечётно! Измените данные")
     elif user_answer == "3":
