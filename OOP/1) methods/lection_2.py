@@ -9,7 +9,7 @@ class Point:
 # Point.set_coords() ### вызов метода
 
 # pt = Point.set_coords()
-# pt.set_coords ### <bound fucni....>
+# pt.set_coords ### <bound functi....>
 # pt.set_coords() ### ошибка, так как должен поступать 1 аргумент self
 
 class Point:
